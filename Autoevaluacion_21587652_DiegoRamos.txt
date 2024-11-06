@@ -1,0 +1,21 @@
+RF1 - TDAs RF1: 1
+RF2 - player RF2: 1
+RF3 - piece RF3: 1
+RF4 - board RF4: 1
+RF5 - board-can-play? RF5: 1
+RF6 - board-set-play-piece RF6: 1
+RF7 - board-check-vertical-win RF7: 1
+RF8 - board-check-horizontal-win RF8: 1
+RF9 - board-check-diagonal-win RF9: 1
+RF10 - board-who-is-winner RF10: 1
+RF11 - game RF11: 1
+RF12 - game-history RF12: 1
+RF13 - game-is-draw? RF13: 1
+RF14 - player-update-stats RF14: 1
+RF15 - game-get-current-player RF15: 1
+RF16 - game-get-board RF16: 1
+RF17- game-set-end RF17: 0.25
+RF18 - game-player-set-move: 1
+
+
+
