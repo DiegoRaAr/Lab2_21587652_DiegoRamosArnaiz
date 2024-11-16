@@ -1,6 +1,5 @@
 :- use_module("Funciones_Auxiliares_21587652.pl").
 
-
 % Predicado para crear un tablero de Conecta4.
 % Dom: Void
 % board \1

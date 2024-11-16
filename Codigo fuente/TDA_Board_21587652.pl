@@ -73,3 +73,41 @@ check_horizontal_win([Car|_],Int):-
 check_horizontal_win([_|Cdr],Int):-
     check_horizontal_win(Cdr, Int),!.
 check_horizontal_win([],0):- !.
+
+
+
+
+diagonalParte1(_, 4, _, 1).
+diagonalParte1(_, _, 4, 2).
+diagonalParte1([Car|Cdr], ContRed, _, Int):-
+    car(Car, CarFila),
+    CarFila = "red",
+    mapCdr(Cdr, TableroPequeño),
+    Cont2 is ContRed + 1,
+    diagonalParte1(TableroPequeño, Cont2, 0, Int).
+diagonalParte1([Car|Cdr], _, ContYell, Int):-
+    car(Car, CarFila),
+    CarFila = "yellow",
+    mapCdr(Cdr, TableroPequeño),
+    Cont2 is ContYell + 1,
+    diagonalParte1(TableroPequeño, 0, Cont2, Int).
+diagonalParte1([Car|Cdr], _, _, Int):-
+    car(Car, CarFila),
+    CarFila = 0,
+    mapCdr(Cdr, TableroPequeño),
+    diagonalParte1(TableroPequeño, 0, 0, Int).
+
+
+
+diagonalParte2(Board, Int):-
+    diagonalParte1(Board, 0, 0, Int).
+diagonalParte2(Board, Int):-
+    mapCdr(Board, CdrBoard),
+    diagonalParte2(CdrBoard, Int).
+
+
+check_diagonal_win([],0).
+check_diagonal_win([Car|_],Int):-
+    diagonalParte2(Car,Int).
+check_diagonal_win([_|Cdr],Int):-
+    check_diagonal_win(Cdr,Int).
