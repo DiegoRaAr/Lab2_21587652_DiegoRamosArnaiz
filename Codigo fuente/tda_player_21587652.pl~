@@ -1,4 +1,5 @@
 player(Id , Name , Color , Wins , Loss , Draws , Rpiece ,
        [Id , Name , Color , Wins , Loss , Draws , Rpiece]).
 
-get_color([_,_,Color,_,_,_,_], Color).
+get_color(Id,Color):-
+    player(Id,_,Color,_,_,_,_).
