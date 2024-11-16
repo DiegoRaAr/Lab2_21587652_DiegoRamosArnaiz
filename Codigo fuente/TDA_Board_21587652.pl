@@ -75,39 +75,11 @@ check_horizontal_win([_|Cdr],Int):-
 check_horizontal_win([],0):- !.
 
 
-
-
-diagonalParte1(_, 4, _, 1).
-diagonalParte1(_, _, 4, 2).
-diagonalParte1([Car|Cdr], ContRed, _, Int):-
-    car(Car, CarFila),
-    CarFila = "red",
-    mapCdr(Cdr, TableroPequeño),
-    Cont2 is ContRed + 1,
-    diagonalParte1(TableroPequeño, Cont2, 0, Int).
-diagonalParte1([Car|Cdr], _, ContYell, Int):-
-    car(Car, CarFila),
-    CarFila = "yellow",
-    mapCdr(Cdr, TableroPequeño),
-    Cont2 is ContYell + 1,
-    diagonalParte1(TableroPequeño, 0, Cont2, Int).
-diagonalParte1([Car|Cdr], _, _, Int):-
-    car(Car, CarFila),
-    CarFila = 0,
-    mapCdr(Cdr, TableroPequeño),
-    diagonalParte1(TableroPequeño, 0, 0, Int).
-
-
-
-diagonalParte2(Board, Int):-
-    diagonalParte1(Board, 0, 0, Int).
-diagonalParte2(Board, Int):-
-    mapCdr(Board, CdrBoard),
-    diagonalParte2(CdrBoard, Int).
-
-
-check_diagonal_win([],0).
-check_diagonal_win([Car|_],Int):-
-    diagonalParte2(Car,Int).
+% Predicado que permite verificar el estado actual del tablero y entregar el posible ganador que cumple con la regla de conectar 4 fichas de forma vertical.
+% Dom: board (board) X int (1 si gana jugador 1, 2 si gana jugador 2, 0 si no hay ganador vertical)
+% check_diagonal_win/2
+check_diagonal_win([],0):-!.
+check_diagonal_win(Board,Int):-
+    diagonalParte2(Board,Int), !.
 check_diagonal_win([_|Cdr],Int):-
-    check_diagonal_win(Cdr,Int).
+    check_diagonal_win(Cdr,Int), !.

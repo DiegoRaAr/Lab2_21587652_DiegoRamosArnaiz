@@ -1,5 +1,4 @@
-:- module(funciones_auxiliares, [len/2, car/2, cdr/2, cons/3, get_fila1/2, get_fila2/2, get_fila3/2, get_fila4/2, get_fila5/2, get_fila6/2, jugar_ficha/4,se_puede_jugar/2, mapCdr/2, verticalParte1/4, horizontalParte1/4, diagonalParte2/2]).
-
+:- module(funciones_auxiliares, [len/2, car/2, cdr/2, cons/3, get_fila1/2, get_fila2/2, get_fila3/2, get_fila4/2, get_fila5/2, get_fila6/2, jugar_ficha/4,se_puede_jugar/2, mapCdr/2, verticalParte1/4, horizontalParte1/4]).
 
 len([], 0).
 len([_|T], N) :-
@@ -51,12 +50,20 @@ se_puede_jugar([_|Cola],Pos):-
                se_puede_jugar(Cola,Pos2).
 
 
-mapCdr([],[]).
-mapCdr([Car|Cdr],NewBoard):-
-    cdr(Car, CdrFila),
-    mapCdr(Cdr,BoardRec),
-    cons([CdrFila], BoardRec, NewBoard).
-
+mapCdr(Board,NewBoard):-
+    get_fila1(Board,Fila1),
+    get_fila2(Board,Fila2),
+    get_fila3(Board,Fila3),
+    get_fila4(Board,Fila4),
+    get_fila5(Board,Fila5),
+    get_fila6(Board,Fila6),
+    cdr(Fila1, CFila1),
+    cdr(Fila2, CFila2),
+    cdr(Fila3, CFila3),
+    cdr(Fila4, CFila4),
+    cdr(Fila5, CFila5),
+    cdr(Fila6, CFila6),
+    NewBoard = [CFila1,CFila2,CFila3,CFila4,CFila5,CFila6].
 
 verticalParte1(_,4,_,1):- !.
 verticalParte1(_,_,4,2):- !.
@@ -89,34 +96,3 @@ horizontalParte1([Car|Cdr], _, ContYell, Int):-
 horizontalParte1([Car|Cdr],_,_,Int):-
     Car = 0,
     horizontalParte1(Cdr, 0, 0, Int).
-
-
-
-
-diagonalParte1(_, 4, _, 1).
-diagonalParte1(_, _, 4, 2).
-diagonalParte1([Car|Cdr], ContRed, _, Int):-
-    car(Car, CarFila),
-    CarFila = "red",
-    mapCdr(Cdr, TableroPequeño),
-    ContRed2 is ContRed + 1,
-    diagonalParte1(TableroPequeño, ContRed2, 0, Int).
-diagonalParte1([Car|Cdr], _, ContYell, Int):-
-    car(Car, CarFila),
-    CarFila = "yellow",
-    mapCdr(Cdr, TableroPequeño),
-    ContYell2 is ContYell + 1,
-    diagonalParte1(TableroPequeño, 0, ContYell2, Int).
-diagonalParte1([Car|Cdr], _, _, Int):-
-    car(Car, CarFila),
-    CarFila = 0,
-    mapCdr(Cdr, TableroPequeño),
-    diagonalParte1(TableroPequeño, 0, 0, Int).
-
-
-
-diagonalParte2(Board, Int):-
-    diagonalParte1(Board, 0, 0, Int).
-diagonalParte2(Board, Int):-
-    mapCdr(Board, CdrBoard),
-    diagonalParte2(CdrBoard, Int).
