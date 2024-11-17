@@ -75,11 +75,32 @@ check_horizontal_win([_|Cdr],Int):-
 check_horizontal_win([],0):- !.
 
 
-% Predicado que permite verificar el estado actual del tablero y entregar el posible ganador que cumple con la regla de conectar 4 fichas de forma vertical.
-% Dom: board (board) X int (1 si gana jugador 1, 2 si gana jugador 2, 0 si no hay ganador vertical)
+% Predicado que permite verificar el estado actual del tablero y
+% entregar el posible ganador que cumple con la regla de conectar 4
+% fichas de forma diagonal.
+% Dom: board (board) X int (1 si gana jugador
+% 1, 2 si gana jugador 2, 0 si no hay ganador vertical)
 % check_diagonal_win/2
 check_diagonal_win([],0):-!.
 check_diagonal_win(Board,Int):-
     diagonalParte2(Board,Int), !.
 check_diagonal_win([_|Cdr],Int):-
     check_diagonal_win(Cdr,Int), !.
+
+
+% Predicado que permite verificar el estado actual del tablero y entregar el posible ganador que cumple con la regla de conectar 4 fichas de forma diagonal.
+% Dom: board (Board) X Int (1,2 o 0)
+% who_is_winner/2
+who_is_winner(Board, Int):-
+    check_vertical_win(Board, IntVer),
+    (IntVer = 1; IntVer = 2),
+    Int is IntVer, !.
+who_is_winner(Board,Int):-
+    check_horizontal_win(Board, IntHor),
+    (IntHor = 1; IntHor = 2),
+    Int is IntHor, !.
+who_is_winner(Board,Int):-
+    check_diagonal_win(Board, IntDia),
+    (IntDia = 1; IntDia = 2),
+    Int is IntDia, !.
+who_is_winner(_,0):- !.
