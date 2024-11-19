@@ -1,3 +1,4 @@
+:- module(tda_Board, [board/1,can_play/1,play_piece/4,check_vertical_win/2,check_horizontal_win/2,check_diagonal_win/2, who_is_winner/2]).
 :- use_module("Funciones_Auxiliares_21587652.pl").
 
 % Predicado para crear un tablero de Conecta4.
