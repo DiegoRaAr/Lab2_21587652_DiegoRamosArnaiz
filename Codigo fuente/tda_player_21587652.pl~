@@ -1,5 +1,13 @@
 player(Id , Name , Color , Wins , Loss , Draws , Rpiece ,
        [Id , Name , Color , Wins , Loss , Draws , Rpiece]).
 
-get_color(Id,Color):-
-    player(Id,_,Color,_,_,_,_).
+get_color([_,_,Color,_,_,_,_], Color).
+
+update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "win" , [Id,Name,Color,NewWins, Loss, Draw, Rpiece]):-
+    NewWins is Wins + 1.
+update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "loss" , [Id,Name,Color,Wins, NewLoss, Draw, Rpiece]):-
+    NewLoss is Loss + 1.
+update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "loss" , [Id,Name,Color,Wins, Loss, NewDraw, Rpiece]):-
+    NewDraw is Draw + 1.
+
+

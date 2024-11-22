@@ -1,5 +1,5 @@
 %:- use_module("Funciones_Auxiliares_21587652.pl").
-:- use_module("TDA_Board.pl").
+:- use_module("tda_board_21587652.pl").
 
 
 
@@ -46,4 +46,13 @@ get_current_player(Game,Player):-
 get_current_player(Game,Player):-
     get_P2(Game,Player2),
     Player = Player2, !.
+
+
+% Predicado que entrega por pantalla el estado actual del tablero en el juego.
+% Game X Board
+% game_get_board/2
+game_get_board(Game,Board):-
+    get_board(Game,Board).
+
+
 

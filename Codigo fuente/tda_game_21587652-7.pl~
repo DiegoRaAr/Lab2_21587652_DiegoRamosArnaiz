@@ -1,5 +1,5 @@
 %:- use_module("Funciones_Auxiliares_21587652.pl").
-:- use_module("TDA_Board.pl").
+:- use_module("tda_board_21587652.pl").
 
 
 
@@ -33,12 +33,9 @@ is_draw(Game):-
     \+ can_play(Board).
 
 
-
-
-
-
-
-
+% Predicado que obtiene el jugador cuyo turno está en curso.
+% Dom: game (game)
+% get_current_player/2
 get_current_player(Game,Player):-
     get_P1(Game,Player1),
     get_P2(Game,Player2),
@@ -49,4 +46,9 @@ get_current_player(Game,Player):-
 get_current_player(Game,Player):-
     get_P2(Game,Player2),
     Player = Player2, !.
+
+
+
+game_get_board(Game,Board):-
+    get_board(Game,Board).
 
