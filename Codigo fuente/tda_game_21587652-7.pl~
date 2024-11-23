@@ -19,6 +19,7 @@ game_history([_,_,_,_,History],History).
 get_P1([Player1,_,_,_,_],Player1).
 get_P2([_,Player2,_,_,_],Player2).
 get_board([_,_,Board,_,_],Board).
+get_turno([_,_,_,Turno,_],Turno).
 get_Rpiece([_,_,_,_,_,_,Rpiece],Rpiece).
 
 
@@ -57,6 +58,9 @@ game_get_board(Game,Board):-
     get_board(Game,Board).
 
 
+% Predicado finaliza el juego actualizando las estadísticas de los jugadores según el resultado.
+% Dom: Game(game)
+% end_game/2
 end_game(Game, [Jugador1,Jugador2,Board,0,Historial] ):-
     game_get_board(Game, Board),
     game_history(Game,Historial),
@@ -83,6 +87,47 @@ end_game(Game, [Jugador1,Jugador2,Board,0,Historial] ):-
     get_P2(Game,P2),
     update_stats(P1, "loss", Jugador1),
     update_stats(P2, "win",Jugador2).
+
+
+
+
+verificación1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
+    get_current_player(Game,VerificacionPlayer),
+    VerificacionPlayer = Player,
+    get_P1(Game,Player1),
+    get_P2(Game,J2),
+    Player1 = Player,
+    get_nombre(Player,Nombre),
+    restar_pieza(Player1,J1),
+    game_get_board(Game,Board),
+    get_color(Player,Pieza),
+    play_piece(Board,Colunma,Pieza,NewBoard),
+    game_history(Game,Historial),
+    Jugada = [Nombre,Colunma],
+    NewHistorial = [Jugada|Historial],
+    get_turno(Game,TurnoActual),
+    Turno = TurnoActual + 1,!.
+
+verificación1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
+    get_current_player(Game,VerificacionPlayer),
+    VerificacionPlayer = Player,
+    get_P1(Game,J1),
+    get_P2(Game,Player2),
+    Player2 = Player,
+    get_nombre(Player,Nombre),
+    restar_pieza(Player2,J2),
+    game_get_board(Game,Board),
+    get_color(Player,Pieza),
+    play_piece(Board,Colunma,Pieza,NewBoard),
+    game_history(Game,Historial),
+    Jugada = [Nombre,Colunma],
+    NewHistorial = [Jugada|Historial],
+    get_turno(Game,TurnoActual),
+    Turno = TurnoActual + 1,!.
+
+
+
+
 
 
 
