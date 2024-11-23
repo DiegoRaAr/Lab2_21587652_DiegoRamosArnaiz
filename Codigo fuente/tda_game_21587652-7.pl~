@@ -1,5 +1,7 @@
 %:- use_module("Funciones_Auxiliares_21587652.pl").
 :- use_module("tda_board_21587652.pl").
+:- use_module("tda_player_21587652.pl").
+
 
 
 
@@ -28,10 +30,10 @@ is_draw(Game):-
     get_P2(Game,Player2),
     get_Rpiece(Player1,Piezas1),
     get_Rpiece(Player2,Piezas2),
-    (Piezas1 = 0 , Piezas2 = 0),
-    get_board(Game,Board),
-    \+ can_play(Board).
-
+    (Piezas1 = 0 , Piezas2 = 0),!.
+is_draw(Game):-
+    game_get_board(Game,Board),
+    not(can_play(Board)).
 
 % Predicado que obtiene el jugador cuyo turno está en curso.
 % Dom: game (game)
@@ -48,7 +50,47 @@ get_current_player(Game,Player):-
     Player = Player2, !.
 
 
-
+% Predicado que entrega por pantalla el estado actual del tablero en el juego.
+% Game X Board
+% game_get_board/2
 game_get_board(Game,Board):-
     get_board(Game,Board).
+
+
+end_game(Game, [Jugador1,Jugador2,Board,0,Historial] ):-
+    game_get_board(Game, Board),
+    game_history(Game,Historial),
+    is_draw(Game),
+    get_P1(Game,P1),
+    get_P2(Game,P2),
+    update_stats(P1, "draw", Jugador1),
+    update_stats(P2, "draw",Jugador2),!.
+end_game(Game, [Jugador1,Jugador2,Board,0,Historial] ):-
+    game_get_board(Game, Board),
+    game_history(Game,Historial),
+    who_is_winner(Board,Ganador),
+    Ganador = 1,
+    get_P1(Game,P1),
+    get_P2(Game,P2),
+    update_stats(P1, "win", Jugador1),
+    update_stats(P2, "loss",Jugador2),!.
+end_game(Game, [Jugador1,Jugador2,Board,0,Historial] ):-
+    game_get_board(Game, Board),
+    game_history(Game,Historial),
+    who_is_winner(Board,Ganador),
+    Ganador = 2,
+    get_P1(Game,P1),
+    get_P2(Game,P2),
+    update_stats(P1, "loss", Jugador1),
+    update_stats(P2, "win",Jugador2).
+
+
+
+
+
+
+
+
+
+
 

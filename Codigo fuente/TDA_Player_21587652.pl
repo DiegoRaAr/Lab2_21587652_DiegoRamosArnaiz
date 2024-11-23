@@ -1,3 +1,7 @@
+:- module(tda_player, [player/8,get_color/2,update_stats/3]).
+
+
+
 % Predicado que permite crear un jugador.
 % Dom: id (int) X name (string) X color (string) X wins (int) X losses (int) X draws (int) X remaining_pieces (int) X Player
 % player/8
@@ -17,7 +21,7 @@ update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "win" , [Id,Name,Color,Ne
     NewWins is Wins + 1,!.
 update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "loss" , [Id,Name,Color,Wins, NewLoss, Draw, Rpiece]):-
     NewLoss is Loss + 1,!.
-update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "loss" , [Id,Name,Color,Wins, Loss, NewDraw, Rpiece]):-
+update_stats([Id,Name,Color,Wins, Loss, Draw, Rpiece], "draw" , [Id,Name,Color,Wins, Loss, NewDraw, Rpiece]):-
     NewDraw is Draw + 1,!.
 
 
