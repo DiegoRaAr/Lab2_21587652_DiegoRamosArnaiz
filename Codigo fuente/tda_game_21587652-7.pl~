@@ -1,6 +1,7 @@
 %:- use_module("Funciones_Auxiliares_21587652.pl").
 :- use_module("tda_board_21587652.pl").
 :- use_module("tda_player_21587652.pl").
+:- use_module("funciones_auxiliares_21587652").
 
 
 
@@ -91,39 +92,86 @@ end_game(Game, [Jugador1,Jugador2,Board,0,Historial] ):-
 
 
 
-verificación1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
-    get_current_player(Game,VerificacionPlayer),
-    VerificacionPlayer = Player,
+verificacion1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
+    get_current_player(Game,PlayerActual),
+    get_nombre(PlayerActual, NombrePlayerActual),
+    get_nombre(Player,NombrePlayerEntregado),
+    NombrePlayerActual = NombrePlayerEntregado,
     get_P1(Game,Player1),
     get_P2(Game,J2),
-    Player1 = Player,
-    get_nombre(Player,Nombre),
+    get_nombre(Player1,NombrePlayer1),
+    NombrePlayer1 = NombrePlayerEntregado,
     restar_pieza(Player1,J1),
     game_get_board(Game,Board),
     get_color(Player,Pieza),
     play_piece(Board,Colunma,Pieza,NewBoard),
     game_history(Game,Historial),
-    Jugada = [Nombre,Colunma],
+    Jugada = [NombrePlayerEntregado,Colunma],
     NewHistorial = [Jugada|Historial],
     get_turno(Game,TurnoActual),
-    Turno = TurnoActual + 1,!.
+    Turno is TurnoActual + 1,!.
 
-verificación1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
-    get_current_player(Game,VerificacionPlayer),
-    VerificacionPlayer = Player,
+verificacion1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
+    get_current_player(Game,PlayerActual),
+    get_nombre(PlayerActual, NombrePlayerActual),
+    get_nombre(Player,NombrePlayerEntregado),
+    NombrePlayerActual = NombrePlayerEntregado,
     get_P1(Game,J1),
     get_P2(Game,Player2),
-    Player2 = Player,
-    get_nombre(Player,Nombre),
+    get_nombre(Player2,NombrePlayer2),
+    NombrePlayer2 = NombrePlayerEntregado,
     restar_pieza(Player2,J2),
     game_get_board(Game,Board),
     get_color(Player,Pieza),
     play_piece(Board,Colunma,Pieza,NewBoard),
     game_history(Game,Historial),
-    Jugada = [Nombre,Colunma],
+    Jugada = [NombrePlayerEntregado,Colunma],
     NewHistorial = [Jugada|Historial],
     get_turno(Game,TurnoActual),
-    Turno = TurnoActual + 1,!.
+    Turno is TurnoActual + 1,!.
+
+
+player_play(Game,Player,Columna,NewGame):-
+    verificacion1(Game,Player,Columna,JugadaHecha),
+    game_get_board(JugadaHecha,Board),
+    who_is_winner(Board,Int),
+    (Int = 1 , Int = 2),
+    end_game(JugadaHecha,NewGame),!.
+player_play(Game,Player,Columna,NewGame):-
+    verificacion1(Game,Player,Columna,JugadaHecha),
+    is_draw(JugadaHecha),
+    end_game(JugadaHecha,NewGame).
+player_play(Game,Player,Columna,NewGame):-
+    verificacion1(Game,Player,Columna,JugadaHecha),
+    game_get_board(JugadaHecha,Board),
+    who_is_winner(Board,Int),
+    Int = 0,
+    NewGame = JugadaHecha.
+
+
+
+
+
+
+
+mostrarTablero(Game):-
+    get_board(Game,Board),
+    get_fila1(Board,Fila1),
+    get_fila2(Board,Fila2),
+    get_fila3(Board,Fila3),
+    get_fila4(Board,Fila4),
+    get_fila5(Board,Fila5),
+    get_fila6(Board,Fila6),
+    write(Fila1),
+    write(Fila2),
+    write(Fila3),
+    write(Fila4),
+    write(Fila5),
+    write(Fila6).
+
+
+
+
 
 
 

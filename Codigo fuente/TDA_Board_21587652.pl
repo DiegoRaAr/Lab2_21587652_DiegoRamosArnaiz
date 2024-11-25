@@ -84,9 +84,14 @@ check_horizontal_win([],0):- !.
 % check_diagonal_win/2
 check_diagonal_win([],0):-!.
 check_diagonal_win(Board,Int):-
-    diagonalParte2(Board,Int), !.
-check_diagonal_win([_|Cdr],Int):-
-    check_diagonal_win(Cdr,Int), !.
+    diagonalParte2(Board,Int),!.
+check_diagonal_win(Board,Int):-
+    reverse(Board,ReversedBoard),
+    diagonalParte2(ReversedBoard,Int),!.
+check_diagonal_win(Board,Int):-
+    cdr(Board,Cdr),
+    check_diagonal_win(Cdr,Int),!.
+
 
 
 % Predicado que permite verificar el estado actual del tablero y entregar el posible ganador que cumple con la regla de conectar 4 fichas de forma diagonal.
