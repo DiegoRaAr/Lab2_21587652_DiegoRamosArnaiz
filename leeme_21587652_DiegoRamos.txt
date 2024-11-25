@@ -1,0 +1,1 @@
+Para el correcto funcionamiento se debe desacargar el .zip y ejecutar en Prolog
