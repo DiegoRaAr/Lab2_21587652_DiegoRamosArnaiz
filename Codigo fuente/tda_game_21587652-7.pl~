@@ -135,8 +135,15 @@ player_play(Game,Player,Columna,NewGame):-
     verificacion1(Game,Player,Columna,JugadaHecha),
     game_get_board(JugadaHecha,Board),
     who_is_winner(Board,Int),
-    (Int = 1 , Int = 2),
+    Int = 1,
     end_game(JugadaHecha,NewGame),!.
+player_play(Game,Player,Columna,NewGame):-
+    verificacion1(Game,Player,Columna,JugadaHecha),
+    game_get_board(JugadaHecha,Board),
+    who_is_winner(Board,Int),
+    Int = 2,
+    end_game(JugadaHecha,NewGame),!.
+
 player_play(Game,Player,Columna,NewGame):-
     verificacion1(Game,Player,Columna,JugadaHecha),
     is_draw(JugadaHecha),

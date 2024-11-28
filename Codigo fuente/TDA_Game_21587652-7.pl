@@ -130,6 +130,9 @@ verificacion1(Game,Player,Colunma,[J1,J2,NewBoard,Turno,NewHistorial]):-
     get_turno(Game,TurnoActual),
     Turno is TurnoActual + 1,!.
 
+% Predicado que realiza un movimiento.
+% Dom: game (game) X player (player) X column (int) X game (Game)
+% play_piece/4
 
 player_play(Game,Player,Columna,NewGame):-
     verificacion1(Game,Player,Columna,JugadaHecha),
