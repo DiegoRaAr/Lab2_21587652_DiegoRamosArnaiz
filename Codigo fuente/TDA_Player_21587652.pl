@@ -31,4 +31,3 @@ restar_pieza([Id,Name,Color,Wins, Loss, Draw, Rpiece] , [Id,Name,Color,Wins, Los
     NewRpiece is Rpiece - 1,!.
 
 
-

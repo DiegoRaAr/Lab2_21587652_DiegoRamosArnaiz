@@ -1,9 +1,8 @@
 %:- use_module("Funciones_Auxiliares_21587652.pl").
+:- module(tda_Game, [get_P1/2, get_P2/2, get_board/2,get_turno/2,get_Rpiece/2,verificacion1/4,mostrarTablero/1]).
 :- use_module("tda_board_21587652.pl").
 :- use_module("tda_player_21587652.pl").
 :- use_module("funciones_auxiliares_21587652").
-
-
 
 
 % Predicado que permite crear una nueva partida.
@@ -178,22 +177,3 @@ mostrarTablero(Game):-
     write(Fila4),
     write(Fila5),
     write(Fila6).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

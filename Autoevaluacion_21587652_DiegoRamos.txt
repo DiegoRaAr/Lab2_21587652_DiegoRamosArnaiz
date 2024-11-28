@@ -14,7 +14,7 @@ RF13 - game-is-draw? RF13: 1
 RF14 - player-update-stats RF14: 1
 RF15 - game-get-current-player RF15: 1
 RF16 - game-get-board RF16: 1
-RF17- game-set-end RF17: 0.25
+RF17- game-set-end RF17: 1
 RF18 - game-player-set-move: 1
 
 

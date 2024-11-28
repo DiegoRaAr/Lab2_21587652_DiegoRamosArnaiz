@@ -1,5 +1,4 @@
 :- module(tda_Board, [board/1,can_play/1,play_piece/4,check_vertical_win/2,check_horizontal_win/2,check_diagonal_win/2, who_is_winner/2]).
-:- use_module("Funciones_Auxiliares_21587652.pl").
 
 % Predicado para crear un tablero de Conecta4.
 % Dom: Void
@@ -84,10 +83,10 @@ check_horizontal_win([],0):- !.
 % check_diagonal_win/2
 check_diagonal_win([],0):-!.
 check_diagonal_win(Board,Int):-
-    diagonalParte2(Board,Int).
+    diagonalParte2(Board,Int),!.
 check_diagonal_win(Board,Int):-
     reverse(Board,ReversedBoard),
-    diagonalParte2(ReversedBoard,Int).
+    diagonalParte2(ReversedBoard,Int),!.
 check_diagonal_win(Board,Int):-
     cdr(Board,Cdr),
     check_diagonal_win(Cdr,Int),!.

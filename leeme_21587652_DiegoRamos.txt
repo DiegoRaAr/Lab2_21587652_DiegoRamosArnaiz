@@ -1,1 +1,7 @@
-Para el correcto funcionamiento se debe desacargar el .zip y ejecutar en Prolog
+Para un correcto funcionamineto del Conecta4! se debe abrir la consola de SWI-Prolog y consultar el archivo Main_21587652.pl,
+luego se debe copiar cualquier script del archivo y pegarlo en la consola. Siguiendo estos pasos se puede ver el correcto 
+funcionamiento del codigo fuente.
+Especificaciones de Scripts:
+-Script base: Contiene una victoria diagonal
+-Script 1: Contiene una victoria horizontal
+-Script 2: Contiene un Empate

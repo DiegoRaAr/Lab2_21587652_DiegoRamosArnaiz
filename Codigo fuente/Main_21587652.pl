@@ -1,7 +1,5 @@
-:- use_module("tda_game_21587652-7.pl").
-:- use_module("tda_piece_21587652.pl").
-:- use_module("tda_board_21587652.pl").
 :- use_module("tda_player_21587652.pl").
+:- use_module("tda_game_21587652-7.pl").
 :- use_module("Funciones_Auxiliares_21587652.pl").
 
 
@@ -173,10 +171,11 @@ is_draw(Game):-
     get_P2(Game,Player2),
     get_Rpiece(Player1,Piezas1),
     get_Rpiece(Player2,Piezas2),
-    (Piezas1 = 0 , Piezas2 = 0),!.
+    Piezas1 = 0,
+    Piezas2 = 0,!.
 is_draw(Game):-
     game_get_board(Game,Board),
-    not(can_play(Board)).
+    not(can_play(Board)),!.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% RF14 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -281,9 +280,3 @@ player_play(Game,Player,Columna,NewGame):-
     who_is_winner(Board,Int),
     Int = 0,
     NewGame = JugadaHecha.
-
-
-
-
-
-
